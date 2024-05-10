@@ -8,12 +8,6 @@ import { Link } from "react-router-dom";
 import { atoms } from "./atoms";
 import { useSetAtom } from "jotai";
 
-type WSMessage = {
-  SessionID?: string;
-  Type?: string;
-  Value?: string;
-};
-
 function App() {
   const setUser = useSetAtom(atoms.user);
   const [activeStreamers, setActiveStreamers] = useState<
@@ -25,8 +19,8 @@ function App() {
   >([]);
 
   useEffect(() => {
-    const fetchActiveStreams = async () => {
-      fetch("http://[::]:8080/get_rooms", {
+    const fetchActiveStreams = () => {
+      fetch("http://localhost:8080/get_rooms", {
         method: "GET",
       })
         .then((res) => res.json())
@@ -34,6 +28,7 @@ function App() {
           setActiveStreamers(data);
         });
     };
+
     fetchActiveStreams();
 
     return () => {

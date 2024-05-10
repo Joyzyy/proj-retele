@@ -132,7 +132,6 @@ func main() {
 		}
 
 		session := room.NewSession(conn)
-
 		if err := room.CallerConn.WriteJSON(Message{
 			SessionID: session.ID,
 			Type:      "new_session",
@@ -144,7 +143,7 @@ func main() {
 
 		if err := conn.WriteJSON(Message{
 			SessionID: session.ID,
-			Type:      "newSession",
+			Type:      "new_session",
 			Value:     session.ID,
 		}); err != nil {
 			log.Println("calleeWriteJsonError", err)
